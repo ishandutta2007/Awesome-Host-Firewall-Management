@@ -1,0 +1,168 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" width="100%" height="360" style="background:#090d16; border-radius:12px; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; overflow:hidden;">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070a12" />
+      <stop offset="50%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#090d16" />
+    </linearGradient>
+
+    <linearGradient id="glow-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ef4444" />
+      <stop offset="50%" stop-color="#f97316" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+
+    <linearGradient id="shield-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#f97316" stop-opacity="0.2" />
+    </linearGradient>
+
+    <!-- Animated Pulse -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <style>
+      .packet-fast {
+        animation: flowRight 3s linear infinite;
+      }
+      .packet-mid {
+        animation: flowRight 4.5s linear infinite;
+      }
+      .packet-slow {
+        animation: flowRight 6s linear infinite;
+      }
+      .shield-pulse {
+        animation: pulseShield 3s ease-in-out infinite alternate;
+      }
+      .grid-line {
+        stroke: #1e293b;
+        stroke-width: 1;
+        opacity: 0.4;
+      }
+      .tag-pill {
+        animation: floatPill 4s ease-in-out infinite alternate;
+      }
+
+      @keyframes flowRight {
+        0% { transform: translateX(0); opacity: 0; }
+        15% { opacity: 0.9; }
+        85% { opacity: 0.9; }
+        100% { transform: translateX(1100px); opacity: 0; }
+      }
+      @keyframes pulseShield {
+        0% { transform: scale(0.98); opacity: 0.7; }
+        100% { transform: scale(1.03); opacity: 1; }
+      }
+      @keyframes floatPill {
+        0% { transform: translateY(0px); }
+        100% { transform: translateY(-4px); }
+      }
+    </style>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="1200" height="360" fill="url(#bg-grad)" />
+
+  <!-- Cyber Grid Lines (Static Canvas) -->
+  <g class="grid-line">
+    <line x1="0" y1="60" x2="1200" y2="60" />
+    <line x1="0" y1="120" x2="1200" y2="120" />
+    <line x1="0" y1="180" x2="1200" y2="180" />
+    <line x1="0" y1="240" x2="1200" y2="240" />
+    <line x1="0" y1="300" x2="1200" y2="300" />
+    <line x1="150" y1="0" x2="150" y2="360" />
+    <line x1="350" y1="0" x2="350" y2="360" />
+    <line x1="550" y1="0" x2="550" y2="360" />
+    <line x1="750" y1="0" x2="750" y2="360" />
+    <line x1="950" y1="0" x2="950" y2="360" />
+    <line x1="1100" y1="0" x2="1100" y2="360" />
+  </g>
+
+  <!-- Ambient Glow Background Blobs -->
+  <circle cx="1000" cy="90" r="140" fill="#f97316" opacity="0.12" filter="url(#glow)" />
+  <circle cx="200" cy="270" r="160" fill="#06b6d4" opacity="0.1" filter="url(#glow)" />
+  <circle cx="600" cy="180" r="220" fill="#ef4444" opacity="0.08" filter="url(#glow)" />
+
+  <!-- Background Dynamic Network Flow Animation (Behind Text) -->
+  <g opacity="0.75">
+    <!-- Animated Packets -->
+    <g class="packet-fast">
+      <circle cx="50" cy="60" r="3.5" fill="#f97316" filter="url(#glow)" />
+      <line x1="20" y1="60" x2="50" y2="60" stroke="#f97316" stroke-width="2" stroke-opacity="0.5" />
+    </g>
+    <g class="packet-mid" style="animation-delay: -1.5s;">
+      <circle cx="80" cy="120" r="3" fill="#06b6d4" filter="url(#glow)" />
+      <line x1="45" y1="120" x2="80" y2="120" stroke="#06b6d4" stroke-width="2" stroke-opacity="0.5" />
+    </g>
+    <g class="packet-slow" style="animation-delay: -2s;">
+      <circle cx="30" cy="240" r="4" fill="#ef4444" filter="url(#glow)" />
+      <line x1="0" y1="240" x2="30" y2="240" stroke="#ef4444" stroke-width="2.5" stroke-opacity="0.5" />
+    </g>
+    <g class="packet-fast" style="animation-delay: -0.8s;">
+      <circle cx="100" cy="300" r="3" fill="#10b981" filter="url(#glow)" />
+      <line x1="70" y1="300" x2="100" y2="300" stroke="#10b981" stroke-width="2" stroke-opacity="0.5" />
+    </g>
+  </g>
+
+  <!-- Decorative Shield Icon / Badge (Right Side) -->
+  <g transform="translate(980, 160)" class="shield-pulse">
+    <polygon points="0,-70 65,-40 65,35 0,75 -65,35 -65,-40" fill="url(#shield-grad)" stroke="#f97316" stroke-width="2.5" />
+    <!-- Firewall Wall Layers inside shield -->
+    <path d="M-30,-20 L30,-20 M-40,0 L40,0 M-30,20 L30,20" stroke="#fef08a" stroke-width="3" stroke-linecap="round" opacity="0.8" />
+    <circle cx="0" cy="0" r="6" fill="#ef4444" filter="url(#glow)" />
+  </g>
+
+  <!-- Foreground Content Block (High contrast, clearly visible) -->
+  <!-- Top Category Tag -->
+  <g transform="translate(80, 68)">
+    <rect width="210" height="28" rx="14" fill="#ef4444" fill-opacity="0.18" stroke="#ef4444" stroke-width="1.2" />
+    <circle cx="16" cy="14" r="5" fill="#ef4444" />
+    <text x="30" y="19" font-size="12" font-weight="700" fill="#fca5a5" letter-spacing="1.5">CYBERSECURITY CURATION</text>
+  </g>
+
+  <!-- Main Headline Title -->
+  <text x="80" y="145" font-size="44" font-weight="900" fill="#ffffff" letter-spacing="-0.5">
+    Host Firewall Management
+  </text>
+
+  <!-- Accent Glow Underline Bar -->
+  <rect x="80" y="162" width="340" height="4" rx="2" fill="url(#glow-grad)" />
+
+  <!-- Subtitle -->
+  <text x="80" y="200" font-size="18" font-weight="500" fill="#94a3b8">
+    Curated Hub for Endpoint Firewall Policies, Microsegmentation &amp; Linux Fleet Orchestration
+  </text>
+
+  <!-- Dynamic Feature Badges / Pills in Foreground Bottom -->
+  <g transform="translate(80, 245)" class="tag-pill">
+    <!-- Pill 1: Zero Trust -->
+    <g transform="translate(0, 0)">
+      <rect width="145" height="34" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1" />
+      <text x="16" y="22" font-size="13" font-weight="600" fill="#38bdf8">🛡️ Zero Trust</text>
+    </g>
+
+    <!-- Pill 2: Microsegmentation -->
+    <g transform="translate(155, 0)">
+      <rect width="180" height="34" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1" />
+      <text x="16" y="22" font-size="13" font-weight="600" fill="#fb923c">⚡ Microsegmentation</text>
+    </g>
+
+    <!-- Pill 3: nftables & eBPF -->
+    <g transform="translate(345, 0)">
+      <rect width="170" height="34" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1" />
+      <text x="16" y="22" font-size="13" font-weight="600" fill="#a78bfa">🐧 nftables &amp; eBPF</text>
+    </g>
+
+    <!-- Pill 4: Enterprise NSPM -->
+    <g transform="translate(525, 0)">
+      <rect width="175" height="34" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1" />
+      <text x="16" y="22" font-size="13" font-weight="600" fill="#34d399">🌐 Enterprise NSPM</text>
+    </g>
+  </g>
+</svg>
